@@ -1,5 +1,4 @@
-import { useEffect, useState, useRef } from 'react'
-import { io } from 'socket.io-client'
+import { useState, useRef } from 'react'
 
 import { ChatContainer, Column, Button, Row, Typography } from 'components'
 
@@ -9,34 +8,7 @@ const Chat = ({ user, setUser }) => {
 
   const messageRef = useRef()
 
-  const handlerSendMessage = () => {
-    if (!storeSocket || !messageRef) return
-
-    const message = messageRef.current.value
-
-    setMessages((prevState) => [...prevState, { message, user }])
-    storeSocket.emit('new-message', {
-      message,
-      user,
-    })
-    messageRef.current.value = ''
-  }
-
-  useEffect(() => {
-    const socket = io('https://workshopamf.gestaods.com.br/')
-
-    socket.on('connect', () => {
-      socket.emit('join-room', user?.room)
-      setStoreSocket(socket)
-    })
-
-    socket.on('send-message', (data) =>
-      setMessages((prevState) => [...prevState, data])
-    )
-
-    return () => socket.disconnect()
-    //eslint-disable-next-line
-  }, [])
+  const handlerSendMessage = () => {}
 
   return (
     <Column alignItems='center'>

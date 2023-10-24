@@ -16,9 +16,9 @@ const SigninUser = ({
       <Input ref={userRef} type='text' placeholder='Digite seu nome' />
       <Row alignItems='center' gap='10px' mt='20px'>
         <Select width='100%' ref={roomRef} options={rooms} />
-        <Button maxWidth='32px' onClick={() => setCreateRoom(true)}>
+        {/* <Button maxWidth='32px' onClick={() => setCreateRoom(true)}>
           +
-        </Button>
+        </Button> */}
       </Row>
       <Button
         mt='20px'
