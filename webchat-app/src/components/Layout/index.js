@@ -1,6 +1,9 @@
 import { createGlobalStyle } from 'styled-components'
+import { ToastContainer } from 'react-toastify'
 
 import Column from '../Column'
+
+import 'react-toastify/dist/ReactToastify.css'
 
 const GlobalStyles = createGlobalStyle`
   *{
@@ -15,6 +18,17 @@ const GlobalStyles = createGlobalStyle`
 const Layout = ({ children }) => (
   <Column justifyContent='center' minHeight='100vh' height='100%'>
     <GlobalStyles />
+    <ToastContainer
+      position='top-center'
+      autoClose={1000}
+      hideProgressBar={false}
+      newestOnTop={false}
+      closeOnClick
+      rtl={false}
+      pauseOnFocusLoss
+      draggable
+      pauseOnHover
+    />
     {children}
   </Column>
 )

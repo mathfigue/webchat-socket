@@ -23,7 +23,7 @@ const Chat = ({ user, setUser }) => {
   }
 
   useEffect(() => {
-    const socket = io('http://localhost:3001')
+    const socket = io('https://workshopamf.gestaods.com.br/')
 
     socket.on('connect', () => {
       socket.emit('join-room', user?.room)

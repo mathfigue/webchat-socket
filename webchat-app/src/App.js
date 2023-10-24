@@ -5,6 +5,7 @@ import { Chat, Signin } from 'routes'
 import { Column, Layout } from 'components'
 
 import gestaoDS from 'assets/logo_gestaods.png'
+import { toast } from 'react-toastify'
 
 const App = () => {
   const [user, setUser] = useState('')
@@ -15,6 +16,7 @@ const App = () => {
   const handlerCheckUser = () => {
     if (!userRef?.current?.value.trim()) {
       userRef.current.focus()
+      toast.warning('Você precisa informar um nome antes de entrar na sala.')
       return
     }
 

@@ -1,32 +1,43 @@
-import { Column, Input, Button, Select } from 'components'
+import { useEffect, useState } from 'react'
+import { getRooms } from 'providers/supabase'
+import { toast } from 'react-toastify'
 
-const rooms = [
-  {
-    value: 'default',
-    label: 'Sala padrão',
-  },
-  {
-    value: 'oficina',
-    label: 'Oficina',
-  },
-]
+import { Column, CreateRoom, SigninUser } from 'components'
 
 const Signin = ({ userRef, roomRef, handlerCheckUser }) => {
+  const [rooms, setRooms] = useState([])
+  const [createRoom, setCreateRoom] = useState(false)
+
+  const handlerGetRoom = async () => {
+    try {
+      const { data: rooms } = await getRooms()
+
+      setRooms(rooms)
+    } catch {
+      toast.error('Não foi possível resgatar listagem de salas.')
+    }
+  }
+
+  useEffect(() => {
+    handlerGetRoom()
+  }, [])
+
   return (
     <Column alignItems='center'>
-      <Column width='100%' maxWidth='420px'>
-        <Input ref={userRef} type='text' placeholder='Digite seu nome' />
-        <Select ref={roomRef} mt='20px' options={rooms} />
-        <Button
-          mt='20px'
-          color='primary'
-          fontWeight='bold'
-          fontSize='16px'
-          onClick={handlerCheckUser}
-        >
-          Entrar
-        </Button>
-      </Column>
+      {createRoom ? (
+        <CreateRoom
+          handlerGetRoom={handlerGetRoom}
+          setCreateRoom={setCreateRoom}
+        />
+      ) : (
+        <SigninUser
+          userRef={userRef}
+          roomRef={roomRef}
+          rooms={rooms}
+          setCreateRoom={setCreateRoom}
+          handlerCheckUser={handlerCheckUser}
+        />
+      )}
     </Column>
   )
 }

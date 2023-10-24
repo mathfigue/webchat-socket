@@ -17,6 +17,16 @@ export const variants = ({ color = 'primary' }) =>
           border: `1px solid ${colors[color].main}`,
         },
       },
+      outlined: {
+        color: colors[color].dark,
+        bg: colors.white,
+        border: `1px solid ${colors[color].dark}`,
+        '&:hover': {
+          bg: colors.white,
+          fill: colors[color].dark,
+          border: `1px solid ${colors[color].main}`,
+        },
+      },
       rounded: {
         borderRadius: '100%',
         border: 'none',
